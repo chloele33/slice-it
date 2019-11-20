@@ -22,7 +22,7 @@ public class MoveTowardPlayer : MonoBehaviour
         if(rotate)
             rb.velocity = Vector3.right * speed;
         else
-            transform.position += Vector3.right * speed;
+            transform.position += Vector3.right * speed*Time.deltaTime;
 
         
     }
