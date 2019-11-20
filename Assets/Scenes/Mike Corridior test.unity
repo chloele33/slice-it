@@ -4540,7 +4540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb92e6e5864465418c0a098ea95f911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 1
   bounceSpeed: 0
   rotate: 0
   bouncing: 0
@@ -7163,6 +7163,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 902905634}
     m_Modifications:
+    - target: {fileID: 1000012930008006, guid: 4048ac168cdaea84db6ae151f702d340, type: 3}
+      propertyPath: m_Name
+      value: ElevatorDoor
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012271070720, guid: 4048ac168cdaea84db6ae151f702d340, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.5
@@ -7210,10 +7214,6 @@ PrefabInstance:
     - target: {fileID: 4000012271070720, guid: 4048ac168cdaea84db6ae151f702d340, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.0000007
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000012930008006, guid: 4048ac168cdaea84db6ae151f702d340, type: 3}
-      propertyPath: m_Name
-      value: ElevatorDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048ac168cdaea84db6ae151f702d340, type: 3}
@@ -12677,7 +12677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb92e6e5864465418c0a098ea95f911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  speed: 2
   bounceSpeed: 6
   rotate: 0
   bouncing: 1
