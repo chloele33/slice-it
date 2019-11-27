@@ -15,6 +15,8 @@ public class Slice : MonoBehaviour
         if (!pieces[1].GetComponent<Rigidbody>())
         {
             pieces[1].AddComponent<Rigidbody>();
+            MeshCollider temp = pieces[1].AddComponent<MeshCollider>();
+            temp.convex = true;
         }
 
         Destroy(pieces[1], 1);
