@@ -19,14 +19,25 @@ public class Spawner : MonoBehaviour
         {
             GameObject go = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)]);
 
-            Rigidbody rb = go.GetComponent<Rigidbody>();
-            rb.velocity = new Vector3(5f, 0f, 0f);
-            //rb.useGravity = true;
+            if (go.tag != "UnbreakableCube")
+            {
+                Rigidbody rb = go.GetComponent<Rigidbody>();
+                rb.velocity = new Vector3(5f, 0f, 0f);
+                //rb.useGravity = true;
 
-            Vector3 pos = transform.position;
-            pos.y += Random.Range(-1f, 2f);
-            pos.z += Random.Range(-2f, 2f);
-            go.transform.position = pos;
+                Vector3 pos = transform.position;
+                pos.y += Random.Range(-1f, 2f);
+                pos.z += Random.Range(-2f, 2f);
+                go.transform.position = pos;
+            }
+            else
+            {
+                Vector3 pos = transform.position;
+                pos.y += Random.Range(0.5f, 2f);
+                go.transform.position = pos;
+            }
+
+            
 
             yield return new WaitForSeconds(waitTime);
         }

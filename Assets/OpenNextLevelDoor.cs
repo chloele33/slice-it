@@ -21,6 +21,7 @@ public class OpenNextLevelDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(transform.position.x - player.position.x);
         if(Mathf.Abs(transform.position.x - player.position.x)<= detectionDistance)
         {
             top.position += Vector3.up * speed * Time.deltaTime;
