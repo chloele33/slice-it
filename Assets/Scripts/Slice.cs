@@ -10,6 +10,7 @@ public class Slice : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject victim = collision.collider.gameObject;
+
         GameObject[] pieces = BLINDED_AM_ME.MeshCut.Cut(victim, transform.position, transform.right, capMaterial);
 
         if (!pieces[1].GetComponent<Rigidbody>())

@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f144ab2cdc9f4e6c966138c58816e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DefaultLength: 5
+  m_Dot: {fileID: 2116034301933678310}
+  m_InputModule: {fileID: 0}
 --- !u!20 &354069594
 Camera:
   m_ObjectHideFlags: 0
@@ -184,7 +187,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
