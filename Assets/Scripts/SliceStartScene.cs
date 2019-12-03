@@ -28,6 +28,9 @@ public class SliceStartScene : MonoBehaviour
         if (col.CompareTag("startCube"))
         {
             SceneManager.LoadScene("GameScene");
+        } else if (col.CompareTag("instructionCube"))
+        {
+            Debug.Log("load instructions");
         }
 
         
