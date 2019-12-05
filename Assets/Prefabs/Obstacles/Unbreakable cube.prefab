@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 956415126963877267}
   - component: {fileID: 1677104499021840413}
   - component: {fileID: 553829912358537854}
+  - component: {fileID: 7930327609164315930}
   m_Layer: 0
   m_Name: Unbreakable cube
   m_TagString: UnbreakableCube
@@ -109,3 +110,16 @@ MonoBehaviour:
   bounceSpeed: 0
   rotate: 0
   bouncing: 0
+--- !u!114 &7930327609164315930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6089889284185601989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666f6fd401eff6e459df03cfdddcf9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedBefore: 0

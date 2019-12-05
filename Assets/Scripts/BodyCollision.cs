@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BodyCollision : MonoBehaviour
 {
     public Transform head;
-    public Transform feet;
+
+    public GameObject cam;
+
+    bool detectedBefore = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +28,31 @@ public class BodyCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "UnbreakableCube")
         {
-            Debug.Log("Collided with obstacle");
+            if (detectedBefore)
+            {
+                return;
+            }
+
+            ObjectHit obj = collision.gameObject.GetComponent<ObjectHit>();
+
+            if (obj.detectedBefore == false)
+            {
+                Debug.Log("Collided with obstacle");
+                //gameObject.GetComponent<PlayerHealth>().ModifyHealth(1);
+                //FindObjectOfType<PlayerHealth>().ModifyHealth(1);
+                cam.GetComponent<PlayerHealth>().ModifyHealth(1);
+                obj.detectedBefore = true; ;
+                detectedBefore = true;
+            }
+            
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "UnbreakableCube")
+        {
+            detectedBefore = false;
         }
     }
 }
