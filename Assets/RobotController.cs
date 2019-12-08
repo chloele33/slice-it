@@ -125,7 +125,7 @@ public class RobotController : MonoBehaviour
                 anim.speed = 1.0f;
             }
         }
-
+    
         if (!IsClosestRobot())
         {
             agent.isStopped = true;
@@ -175,6 +175,15 @@ public class RobotController : MonoBehaviour
                 moved = true;
             }
         }
+        else
+        {
+            //if attacking makes robot look at player but makes it not look weird
+            var lookPos = target.position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+
+            transform.rotation = rotation;
+        }
 
         //forces the robot to move a little before attacked
         if (!moved)
@@ -183,6 +192,7 @@ public class RobotController : MonoBehaviour
 
         anim.SetBool("HoldingLightsaber", !shouldMove);
 
+      
     }
 
 
