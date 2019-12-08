@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        GetComponentInChildren<SteamVR_TrackedController>().TriggerClicked += RemoveHealth;
+        //GetComponentInChildren<SteamVR_TrackedController>().TriggerClicked += RemoveHealth;
     }
 
     public void ModifyHealth(int amount)

@@ -15,7 +15,9 @@ public delegate void PointerEventHandler(object sender, PointerEventArgs e);
 
 public class SteamVR_LaserPointer : MonoBehaviour
 {
-    public bool active = true;
+	public float throwSpeed = 500;
+
+	public bool active = true;
     public Color color;
     public float thickness = 0.002f;
     public GameObject holder;
@@ -28,9 +30,19 @@ public class SteamVR_LaserPointer : MonoBehaviour
 
     Transform previousContact = null;
 
+	private int nChildren;
+	[SerializeField]
+	private GameObject bomb = null;
+
+	Rigidbody simulator;
+
 	// Use this for initialization
 	void Start ()
     {
+		simulator = new GameObject().AddComponent<Rigidbody>();
+		simulator.name = "Simulator";
+		simulator.transform.parent = transform.parent;
+
         holder = new GameObject();
         holder.transform.parent = this.transform;
         holder.transform.localPosition = Vector3.zero;
@@ -79,6 +91,8 @@ public class SteamVR_LaserPointer : MonoBehaviour
     // Update is called once per frame
 	void Update ()
     {
+		simulator.velocity = (transform.position - simulator.position) * throwSpeed;
+
         if (!isActive)
         {
             isActive = true;
@@ -130,11 +144,37 @@ public class SteamVR_LaserPointer : MonoBehaviour
 
         if (controller != null && controller.triggerPressed)
         {
+			//Debug.Log("Trigger Pressed");
             pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
+			
+			if (bHit && bomb == null && hit.collider.gameObject.CompareTag("Bomb"))
+			{
+				Debug.Log("Bomb Hit");
+
+				bomb = hit.collider.gameObject;
+
+				Rigidbody rb = bomb.GetComponent<Rigidbody>();
+				rb.isKinematic = true;
+				rb.freezeRotation = true;
+				bomb.GetComponent<MoveTowardPlayer>().enabled = false;
+				bomb.transform.parent = this.transform;				
+			}
         }
         else
         {
             pointer.transform.localScale = new Vector3(thickness, thickness, dist);
+
+			if (bomb != null)
+			{
+				Rigidbody rb = bomb.GetComponent<Rigidbody>();
+				//rb.useGravity = true;
+				rb.isKinematic = false;
+				rb.freezeRotation = false;
+				rb.velocity = simulator.velocity;
+				bomb.transform.parent = null;
+
+				bomb = null;
+			}
         }
         pointer.transform.localPosition = new Vector3(0f, 0f, dist/2f);
     }
