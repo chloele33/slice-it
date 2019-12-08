@@ -1218,7 +1218,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.5
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
@@ -1967,11 +1967,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2608148981333031476, guid: 51624d646e58a9741966f06e883ce210,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2712008826560268504, guid: 51624d646e58a9741966f06e883ce210,
         type: 3}
       propertyPath: bladeColor.r
@@ -1982,14 +1977,19 @@ PrefabInstance:
       propertyPath: bladeColor.g
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2621450211986355242, guid: 51624d646e58a9741966f06e883ce210,
+    - target: {fileID: 2608148981333031476, guid: 51624d646e58a9741966f06e883ce210,
         type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2607968904065668422, guid: 51624d646e58a9741966f06e883ce210,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2621450211986355242, guid: 51624d646e58a9741966f06e883ce210,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2716877835592007910, guid: 51624d646e58a9741966f06e883ce210,
@@ -2098,11 +2098,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2608148981333031476, guid: 51624d646e58a9741966f06e883ce210,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2712008826560268504, guid: 51624d646e58a9741966f06e883ce210,
         type: 3}
       propertyPath: bladeColor.r
@@ -2113,14 +2108,19 @@ PrefabInstance:
       propertyPath: bladeColor.g
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2621450211986355242, guid: 51624d646e58a9741966f06e883ce210,
+    - target: {fileID: 2608148981333031476, guid: 51624d646e58a9741966f06e883ce210,
         type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2607968904065668422, guid: 51624d646e58a9741966f06e883ce210,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2621450211986355242, guid: 51624d646e58a9741966f06e883ce210,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2716877835592007910, guid: 51624d646e58a9741966f06e883ce210,
