@@ -16,6 +16,7 @@ public delegate void PointerEventHandler(object sender, PointerEventArgs e);
 public class SteamVR_LaserPointer : MonoBehaviour
 {
 	public float throwSpeed = 500;
+	public GameObject tractorBeam;
 
 	public bool active = true;
     public Color color;
@@ -144,10 +145,12 @@ public class SteamVR_LaserPointer : MonoBehaviour
 
         if (controller != null && controller.triggerPressed)
         {
+			tractorBeam.SetActive(true);
+
 			//Debug.Log("Trigger Pressed");
-            pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
+            //pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
 			
-			if (bHit && bomb == null && hit.collider.gameObject.CompareTag("Bomb"))
+			if (bHit && bomb == null && hit.collider.gameObject.CompareTag("Bomb") && hit.distance < 8f)
 			{
 				Debug.Log("Bomb Hit");
 
@@ -163,6 +166,8 @@ public class SteamVR_LaserPointer : MonoBehaviour
         else
         {
             pointer.transform.localScale = new Vector3(thickness, thickness, dist);
+
+			tractorBeam.SetActive(false);
 
 			if (bomb != null)
 			{
