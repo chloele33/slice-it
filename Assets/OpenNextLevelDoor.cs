@@ -6,7 +6,9 @@ public class OpenNextLevelDoor : MonoBehaviour
 {
     public Transform player;
 
-    public float speed;
+	public GameObject lightAtTheEnd;
+
+	public float speed;
 
     public float detectionDistance;
 
@@ -24,7 +26,10 @@ public class OpenNextLevelDoor : MonoBehaviour
         //Debug.Log(transform.position.x - player.position.x);
         if(Mathf.Abs(transform.position.x - player.position.x)<= detectionDistance)
         {
-            top.position += Vector3.up * speed * Time.deltaTime;
+			lightAtTheEnd.SetActive(true);
+
+
+			top.position += Vector3.up * speed * Time.deltaTime;
 
             bottom.position += Vector3.down * speed * Time.deltaTime;
         }
