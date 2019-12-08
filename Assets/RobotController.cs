@@ -161,20 +161,23 @@ public class RobotController : MonoBehaviour
         // Update animation parameters
         anim.SetBool("Moving", shouldMove);
         anim.SetFloat("Direction", velocity.y);
-        //anim.SetFloat("vely", velocity.y);
-        if (shouldMove)
-        {
+		//anim.SetFloat("vely", velocity.y);
+		if (shouldMove)
+		{
 
-            lookAtTargetPosition = agent.steeringTarget + transform.forward;
+			lookAtTargetPosition = agent.steeringTarget + transform.forward;
 
-            if (worldDeltaPosition.magnitude > agent.radius)
-            {
-                agent.nextPosition = transform.position + 0.9f * worldDeltaPosition;
-                // transform.LookAt(lookAtTargetPosition);
+			if (worldDeltaPosition.magnitude > agent.radius)
+			{
+				agent.nextPosition = transform.position + 0.9f * worldDeltaPosition;
+				// transform.LookAt(lookAtTargetPosition);
 
-                moved = true;
-            }
-        }
+				moved = true;
+			}
+		}
+		else
+			transform.LookAt(target.position);
+
 
         //forces the robot to move a little before attacked
         if (!moved)

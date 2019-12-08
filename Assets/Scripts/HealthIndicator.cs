@@ -11,10 +11,16 @@ public class HealthIndicator : MonoBehaviour
     [SerializeField]
     private float updateSpeedSeconds = 0.5f;
 
+	[SerializeField]
+	private Image redScreen;
+
+
     private void Start()
     {
         //material = GetComponent<Renderer>().material;
         FindObjectOfType<PlayerHealth>().OnHealthPctChanged += HealthIndicator_OnHealthPctChanged;
+
+		redScreen.enabled = false;
     }
 
     private void HealthIndicator_OnHealthPctChanged(float pct)
@@ -28,14 +34,21 @@ public class HealthIndicator : MonoBehaviour
         float preChangePct = foregroundImage.fillAmount;
         float elapsed = 0f;
 
+		//redScreen.color = new Color(255, 0, 0, 90);
+		redScreen.enabled = true;
+
         while (elapsed < updateSpeedSeconds)
         {
             elapsed += Time.deltaTime;
             foregroundImage.fillAmount = Mathf.Lerp(preChangePct, pct, elapsed / updateSpeedSeconds);
-            yield return null;
+			float a = Mathf.Lerp(90, 0, elapsed / updateSpeedSeconds);
+			//redScreen.color = new Color(255, 0, 0, a);
+
+			yield return null;
         }
 
         foregroundImage.fillAmount = pct;
+		redScreen.enabled = false;
     }
 
     //private void LateUpdate()
