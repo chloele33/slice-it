@@ -17,12 +17,35 @@ public class RobotController : MonoBehaviour
     private Vector3 lookAtPosition;
 
     public Transform target;
-    // public bool looking = true;
+    
+    public GameObject lightsaberOnBack;
 
+    public GameObject lightsaberInHand;
+
+    public GameObject animatingLightsaber;
+
+    //how long it takes for the lightsaber to be transferred from the robot's back to its hand
+    public float lightsaberTransferDuration;
+
+    //prevents the player from being damage multiple times for a single attack
+    public float delayBetweenPlayerDamage;
+
+    private bool movingLightsaberFromBackToHand = false, movingLightsaberFromHandToBack = false;
+
+    private bool moved = false;
+
+
+    private float sum = 0;
+
+    private bool canDamagePlayer = false;
+
+    private float damageDelay;
 
     // Start is called before the first frame update
     void Start()
     {
+        damageDelay = delayBetweenPlayerDamage;
+
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         // Don’t update position automatically
@@ -39,19 +62,83 @@ public class RobotController : MonoBehaviour
         lookAtTargetPosition = head.position + transform.forward;
         lookAtPosition = lookAtTargetPosition;
 
-        if (target)
+        if (target == null)
         {
-            agent.destination = target.position;
+            target = Camera.main.transform;
         }
-        else
+       // agent.destination = target.position;
+    }
+
+    bool IsClosestRobot()
+    {
+        GameObject[] robots = GameObject.FindGameObjectsWithTag("Robot");
+        float thisRobotDist = Vector3.Distance(transform.position, target.position);
+
+        foreach(GameObject robot in robots)
         {
-            agent.destination = Camera.main.transform.position;
+            float otherRobotDist = Vector3.Distance(robot.transform.position, target.position);
+            if (otherRobotDist < thisRobotDist)
+                return false;
         }
+        return true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+        if (movingLightsaberFromBackToHand)
+        {
+            sum += Time.deltaTime;
+            Vector3 p = Vector3.Lerp(lightsaberOnBack.transform.position, lightsaberInHand.transform.position, sum / lightsaberTransferDuration);
+            animatingLightsaber.transform.position = p;
+            if (sum >= lightsaberTransferDuration)
+            {
+                lightsaberInHand.SetActive(true);
+
+                animatingLightsaber.transform.parent = lightsaberInHand.transform.parent;
+
+                animatingLightsaber.SetActive(false);
+                movingLightsaberFromBackToHand = false;
+                sum = 0;
+
+                anim.speed = 1.0f;
+            }
+        }
+
+        if (movingLightsaberFromHandToBack)
+        {
+            sum += Time.deltaTime;
+            Vector3 p = Vector3.Lerp(lightsaberInHand.transform.position, lightsaberOnBack.transform.position, sum / lightsaberTransferDuration);
+            animatingLightsaber.transform.position = p;
+            if (sum >= lightsaberTransferDuration)
+            {
+                lightsaberOnBack.SetActive(true);
+
+                animatingLightsaber.transform.parent = lightsaberOnBack.transform.parent;
+
+                animatingLightsaber.SetActive(false);
+                movingLightsaberFromHandToBack = false;
+                sum = 0;
+
+                anim.speed = 1.0f;
+            }
+        }
+
+        if (!IsClosestRobot())
+        {
+            agent.isStopped = true;
+            anim.SetBool("HoldingLightsaber", false);
+            anim.SetBool("Moving", false);
+            return;
+        }
+        agent.isStopped = false;
+        agent.SetDestination(target.position);
+
+        if (damageDelay > 0)
+            damageDelay -= Time.deltaTime;
+
         Vector3 worldDeltaPosition = agent.nextPosition - transform.position;
 
         // Map 'worldDeltaPosition' to local space
@@ -69,27 +156,61 @@ public class RobotController : MonoBehaviour
 
         bool shouldMove = velocity.magnitude > 0.5f && agent.remainingDistance > agent.radius;
 
-       
+        // Debug.Log("velocity.magnitude > 0.5f is "+ (velocity.magnitude > 0.5f)+ " , agent.remainingDistance > agent.radius is "+(agent.remainingDistance > agent.radius));
+
         // Update animation parameters
         anim.SetBool("Moving", shouldMove);
         anim.SetFloat("Direction", velocity.y);
         //anim.SetFloat("vely", velocity.y);
-        if (!shouldMove)
-            return;
-        lookAtTargetPosition = agent.steeringTarget + transform.forward;
-
-        if (worldDeltaPosition.magnitude > agent.radius)
+        if (shouldMove)
         {
-            agent.nextPosition = transform.position + 0.9f * worldDeltaPosition;
-           // transform.LookAt(lookAtTargetPosition);
+
+            lookAtTargetPosition = agent.steeringTarget + transform.forward;
+
+            if (worldDeltaPosition.magnitude > agent.radius)
+            {
+                agent.nextPosition = transform.position + 0.9f * worldDeltaPosition;
+                // transform.LookAt(lookAtTargetPosition);
+
+                moved = true;
+            }
         }
-        //OnAnimatorIK();
+
+        //forces the robot to move a little before attacked
+        if (!moved)
+            return;
+
+
+        anim.SetBool("HoldingLightsaber", !shouldMove);
+
     }
-    
-    
-    
+
+
+
+    void UnSheathLightsaber()
+    {
+        movingLightsaberFromBackToHand = true;
+
+        animatingLightsaber.SetActive(true);
+        lightsaberOnBack.SetActive(false);
+
+        anim.speed = 0.1f;
+    }
+
+    void SheathLightsaber()
+    {
+        movingLightsaberFromHandToBack = true;
+
+        animatingLightsaber.SetActive(true);
+        lightsaberInHand.SetActive(false);
+
+        anim.speed = 0.1f;
+    }
+
     void OnAnimatorMove()
     {
+        if (anim == null)
+            return;
         // Update position based on animation movement using navigation surface height
         Vector3 position = anim.rootPosition;
         position.y = agent.nextPosition.y;
@@ -97,4 +218,49 @@ public class RobotController : MonoBehaviour
 
        // Debug.Log("OnAnimatorMove");
     }
+
+    void SwordBecomesDangerous()
+    {
+        canDamagePlayer = true;
+    }
+
+    void SwordBecomesHarmless()
+    {
+        canDamagePlayer = false;
+    }
+
+    bool IsSwordDangerous()
+    {
+        return canDamagePlayer;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (damageDelay > 0)
+            return;
+
+        if (!canDamagePlayer)
+            return;
+
+        if (!LightsaberHit(collision))
+            return;
+
+        Debug.Log("player damaged");
+
+        damageDelay = delayBetweenPlayerDamage;
+    }
+
+    //checks if the robot's lightsaber hit the player
+    private bool LightsaberHit(Collision collision)
+    {
+        foreach(ContactPoint contactPoint in collision.contacts)
+        {
+            if(contactPoint.thisCollider.CompareTag("EnemyLightsaber") && contactPoint.otherCollider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

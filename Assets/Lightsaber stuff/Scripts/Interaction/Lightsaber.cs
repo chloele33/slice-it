@@ -80,7 +80,7 @@ public class Lightsaber : MonoBehaviour {
             // consistency check
             if (light == null)
             {
-                Debug.Log("No light found. Blade should have a light as child");
+//Debug.Log("No light found. Blade should have a light as child");
             }
 
             // remember initial scale values (non extending part of the blade)
