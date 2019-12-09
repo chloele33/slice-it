@@ -24,7 +24,14 @@ public class Slice : MonoBehaviour
 				temp.convex = true;
 			}
 
-			Destroy(pieces[1], 1);
+            // Update score
+            if (collision.collider.CompareTag("Obstacle"))
+            {
+                Score.score += 5;
+            }
+
+
+            Destroy(pieces[1], 1);
 		}
     }
 }

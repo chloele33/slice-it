@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public float score;
-    public int displayScore;
+    public static float score;
+    public float displayScore;
 
     public Text scoreUI;
     private float pointIncreasePerSecond;
@@ -24,33 +24,21 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //heldTime += Time.deltaTime;
-        //if (heldTime >= 1)
-        //{
-        //    score += (int)heldTime;
-        //    heldTime -= (int)heldTime;
-        //}
-        //score += pointIncreasePerSecond * Time.deltaTime;
-        //scoreUI.text = score.ToString();
+        if (System.Math.Abs(displayScore - score) > 1)
+        {
+            displayScore = score;
+            scoreUI.text = "SCORE: " + displayScore.ToString();
+        }
+
         pointIncreasePerSecond += Time.deltaTime;
         if (pointIncreasePerSecond >= 1)
         {
             score += (int)pointIncreasePerSecond;
+            displayScore = score;
             pointIncreasePerSecond -= (int)pointIncreasePerSecond;
-            scoreUI.text = "SCORE: " + score.ToString();
+            scoreUI.text = "SCORE: " + displayScore.ToString();
         }
-    }
 
-    //private IEnumerator ScoreUpdater()
-    //{
-    //    while (true)
-    //    {
-    //        //if (displayScore < score)
-    //        //{
-    //            displayScore++;
-    //            scoreUI.text = displayScore.ToString();
-    //        //}
-    //        yield return new WaitForSeconds(1.0f); 
-    //    }
-    //}
+        
+    }
 }
