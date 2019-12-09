@@ -139,6 +139,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning
       objectReference: {fileID: 0}
+    - target: {fileID: 6057889370788410364, guid: b75e690ebf2067a418cb33cd41513412,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 625666151157239007, guid: b75e690ebf2067a418cb33cd41513412,
         type: 3}
       propertyPath: m_LocalPosition.x
