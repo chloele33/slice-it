@@ -38,7 +38,5 @@ public class Score : MonoBehaviour
             pointIncreasePerSecond -= (int)pointIncreasePerSecond;
             scoreUI.text = "SCORE: " + displayScore.ToString();
         }
-
-        
     }
 }
