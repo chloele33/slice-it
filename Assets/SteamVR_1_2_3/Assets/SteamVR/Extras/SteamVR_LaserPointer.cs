@@ -146,6 +146,7 @@ public class SteamVR_LaserPointer : MonoBehaviour
         if (controller != null && controller.triggerPressed)
         {
 			tractorBeam.SetActive(true);
+			GetComponent<AudioSource>().Play();
 
 			//Debug.Log("Trigger Pressed");
             //pointer.transform.localScale = new Vector3(thickness * 5f, thickness * 5f, dist);
@@ -168,6 +169,7 @@ public class SteamVR_LaserPointer : MonoBehaviour
             pointer.transform.localScale = new Vector3(thickness, thickness, dist);
 
 			tractorBeam.SetActive(false);
+			GetComponent<AudioSource>().Stop();
 
 			if (bomb != null)
 			{

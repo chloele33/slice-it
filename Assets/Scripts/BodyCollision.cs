@@ -37,7 +37,7 @@ public class BodyCollision : MonoBehaviour
 
             if (obj.detectedBefore == false)
             {
-                //Debug.Log("Collided with obstacle");
+                Debug.Log("Collided with obstacle");
                 //gameObject.GetComponent<PlayerHealth>().ModifyHealth(1);
                 //FindObjectOfType<PlayerHealth>().ModifyHealth(1);
                 cam.GetComponent<PlayerHealth>().ModifyHealth(1);

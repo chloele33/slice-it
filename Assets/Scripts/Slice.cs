@@ -6,11 +6,15 @@ using UnityEngine;
 public class Slice : MonoBehaviour
 {
     public Material capMaterial;
+	public GameObject Health;
+	public GameObject Spawner;
 
     private void OnCollisionEnter(Collision collision)
     {
-		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("Bomb"))
+		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("Bomb") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
 		{
+			GetComponent<AudioSource>().Play();
+
 			GameObject victim = collision.collider.gameObject;
 			victim.transform.GetChild(0).gameObject.SetActive(true);
 			victim.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
@@ -25,6 +29,30 @@ public class Slice : MonoBehaviour
 			}
 
 			Destroy(pieces[1], 1);
+
+			if (collision.collider.CompareTag("shield"))
+			{
+				Health.GetComponent<HealthIndicator>().shieldOn = true;
+				StartCoroutine(DisableShield());
+			}
+
+			if (collision.collider.CompareTag("Slow"))
+			{
+				Spawner.GetComponent<Spawner>().slowDown = true;
+				StartCoroutine(SlowDown());
+			}
 		}
     }
+
+	IEnumerator DisableShield()
+	{
+		yield return new WaitForSecondsRealtime(10);
+		Health.GetComponent<HealthIndicator>().shieldOn = false;
+	}
+
+	IEnumerator SlowDown()
+	{
+		yield return new WaitForSecondsRealtime(10);
+		Spawner.GetComponent<Spawner>().slowDown = false;
+	}
 }

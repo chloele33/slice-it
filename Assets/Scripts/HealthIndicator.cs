@@ -11,9 +11,10 @@ public class HealthIndicator : MonoBehaviour
     [SerializeField]
     private float updateSpeedSeconds = 0.5f;
 
-	[SerializeField]
+	//[SerializeField]
 	//private Image redScreen;
 
+	public bool shieldOn = false;
 
     private void Start()
     {
@@ -25,8 +26,12 @@ public class HealthIndicator : MonoBehaviour
 
     private void HealthIndicator_OnHealthPctChanged(float pct)
     {
-        //material.SetFloat("_Cutoff", 1f - pct);
-        StartCoroutine(ChangeToPct(pct));
+		//material.SetFloat("_Cutoff", 1f - pct);
+
+		if (!shieldOn)
+		{
+			StartCoroutine(ChangeToPct(pct));
+		}
     }
 
     private IEnumerator ChangeToPct (float pct)
