@@ -9,7 +9,9 @@ public class Slice : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("Bomb"))
+        if (collision.collider.CompareTag("Obstacle")
+            || collision.collider.CompareTag("Bomb")
+            || collision.collider.CompareTag("ObstacleSliced"))
 		{
 			GameObject victim = collision.collider.gameObject;
 			victim.transform.GetChild(0).gameObject.SetActive(true);
@@ -25,11 +27,16 @@ public class Slice : MonoBehaviour
 			}
 
             // Update score
-            if (collision.collider.CompareTag("Obstacle"))
+            if (collision.collider.CompareTag("ObstacleSliced"))
             {
                 Score.score += 5;
             }
 
+            else if (collision.collider.CompareTag("Obstacle"))
+            {
+                Score.score += 20;
+                victim.tag = "ObstacleSliced";
+            }
 
             Destroy(pieces[1], 1);
 		}
