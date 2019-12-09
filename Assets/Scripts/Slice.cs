@@ -7,6 +7,7 @@ public class Slice : MonoBehaviour
 {
     public Material capMaterial;
 	public GameObject Health;
+	public GameObject CamRig;
 	public GameObject Spawner;
 
     private void OnCollisionEnter(Collision collision)
@@ -32,7 +33,10 @@ public class Slice : MonoBehaviour
 
 			if (collision.collider.CompareTag("shield"))
 			{
-				Health.GetComponent<HealthIndicator>().shieldOn = true;
+				CamRig.GetComponent<PlayerHealth>().shieldOn = true;
+				//Health.GetComponent<HealthIndicator>().shieldHealth.enabled = true;
+				Health.GetComponent<HealthIndicator>().shieldHealth.color = new Color(0, 212, 255);
+				Debug.Log("Shield On");
 				StartCoroutine(DisableShield());
 			}
 
@@ -47,7 +51,10 @@ public class Slice : MonoBehaviour
 	IEnumerator DisableShield()
 	{
 		yield return new WaitForSecondsRealtime(10);
-		Health.GetComponent<HealthIndicator>().shieldOn = false;
+		CamRig.GetComponent<PlayerHealth>().shieldOn = false;
+
+		Debug.Log("Shield Off");
+		Health.GetComponent<HealthIndicator>().shieldHealth.color = Color.green;
 	}
 
 	IEnumerator SlowDown()

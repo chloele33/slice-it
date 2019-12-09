@@ -8,48 +8,68 @@ public class PlayerHealth : MonoBehaviour
 
     private int currentHealth;
 
-    public event Action<float> OnHealthPctChanged = delegate { };
+	public bool shieldOn = false;
+	public GameObject Health;
 
-    //private void OnEnable()
-    //{
-    //    currentHealth = maxHealth;
-    //}
+	public event Action<float> OnHealthPctChanged = delegate { };
 
-    //public void ModifyHealth(int amount)
-    //{
-    //    currentHealth += amount;
+	//private void OnEnable()
+	//{
+	//    currentHealth = maxHealth;
+	//}
 
-    //    float currentHealthPct = (float)currentHealth / (float)maxHealth;
-    //    OnHealthPctChanged(currentHealthPct);
-    //}
+	//public void ModifyHealth(int amount)
+	//{
+	//    currentHealth += amount;
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        ModifyHealth(-10);
-    //    }
-    //}
+	//    float currentHealthPct = (float)currentHealth / (float)maxHealth;
+	//    OnHealthPctChanged(currentHealthPct);
+	//}
 
-    private void Awake()
+	//private void Update()
+	//{
+	//    if (Input.GetKeyDown(KeyCode.Space))
+	//    {
+	//        ModifyHealth(-10);
+	//    }
+	//}
+
+	public void Update()
+	{
+		/*if (shieldOn)
+		{
+			Health.GetComponent<HealthIndicator>().shieldHealth.color = new Color(0, 212, 255);
+		}
+		else
+		{
+			Health.GetComponent<HealthIndicator>().shieldHealth.color = new Color(0, 255, 5);
+		}*/
+	}
+
+	private void Awake()
     {
         currentHealth = maxHealth;
+		shieldOn = false;
         //GetComponentInChildren<SteamVR_TrackedController>().TriggerClicked += RemoveHealth;
     }
 
     public void ModifyHealth(int amount)
     {
-        currentHealth -= amount;
+		if (!shieldOn)
+		{
+			currentHealth -= amount;
 
-        float currentHealthPct = (float)currentHealth / (float)maxHealth;
-        OnHealthPctChanged(currentHealthPct);
+			float currentHealthPct = (float)currentHealth / (float)maxHealth;
+			OnHealthPctChanged(currentHealthPct);
+		}
     }
 
     private void RemoveHealth(object sender, ClickedEventArgs e)
     {
-        //currentHealth--;
-
-        ModifyHealth(1);
+		//currentHealth--;
+		
+		ModifyHealth(1);
+		
         //float pct = (float)currentHealth / (float)maxHealth;
         //OnHealthPctChanged(pct);
     }

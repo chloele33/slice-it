@@ -15,6 +15,7 @@ public class HealthIndicator : MonoBehaviour
 	//private Image redScreen;
 
 	public bool shieldOn = false;
+	public Image shieldHealth;
 
     private void Start()
     {
@@ -28,10 +29,15 @@ public class HealthIndicator : MonoBehaviour
     {
 		//material.SetFloat("_Cutoff", 1f - pct);
 
-		if (!shieldOn)
-		{
+		//if (!shieldOn)
+		//{
 			StartCoroutine(ChangeToPct(pct));
-		}
+			//shieldHealth.enabled = false;
+		//}
+		//else
+		//{
+		//	shieldHealth.enabled = true;
+		//}
     }
 
     private IEnumerator ChangeToPct (float pct)
