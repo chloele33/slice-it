@@ -47,3 +47,11 @@ Update Mode: mergeDefaultDependencies
 The following packages were added:
   com.unity.postprocessing@2.1.4
   com.unity.progrids@3.0.3-preview.4
+
+=== Mon Dec  9 15:19:27 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.postprocessing from version 2.1.4 to 2.1.6
