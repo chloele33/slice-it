@@ -12,7 +12,7 @@ public class Slice : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("Bomb") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
+		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("ObstacleSliced") || collision.collider.CompareTag("Bomb") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
 		{
 			GetComponent<AudioSource>().Play();
 
@@ -44,6 +44,17 @@ public class Slice : MonoBehaviour
 			{
 				Spawner.GetComponent<Spawner>().slowDown = true;
 				StartCoroutine(SlowDown());
+			}
+
+			if (collision.collider.CompareTag("ObstacleSliced"))
+			{
+				Score.score += 5;
+			}
+
+			else if (collision.collider.CompareTag("Obstacle"))
+			{
+				Score.score += 20;
+				victim.tag = "ObstacleSliced";
 			}
 		}
     }
