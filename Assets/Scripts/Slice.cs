@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 [RequireComponent (typeof(Rigidbody))]
 public class Slice : MonoBehaviour
@@ -10,14 +12,27 @@ public class Slice : MonoBehaviour
 	public GameObject CamRig;
 	public GameObject Spawner;
 
-    private void OnCollisionEnter(Collision collision)
+	public SteamVR_TrackedObject rightHand;
+
+
+	//public SteamVR_Action_Vibration g;
+
+	private void OnCollisionEnter(Collision collision)
     {
 		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("ObstacleSliced") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
 		{
+
+
+			SteamVR_Controller.Input((int)rightHand.index).TriggerHapticPulse(500);
+
+
+			Handheld.Vibrate();
+
 			if (collision.collider.CompareTag("shield"))
 			{
 				collision.collider.gameObject.GetComponent<MoveTowardPlayer>().enabled = false;
 			}
+
 
 			GetComponent<AudioSource>().Play();
 
