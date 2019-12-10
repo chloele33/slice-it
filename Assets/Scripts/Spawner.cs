@@ -22,19 +22,19 @@ public class Spawner : MonoBehaviour
 			GameObject go;
 
 			// blue
-			if (prob <= 50)
+			if (prob <= 70)
 			{
 				go = Instantiate(obstaclePrefabs[0]);
 			}
-			else if (prob <= 60) // red
+			else if (prob <= 80) // red
 			{
 				go = Instantiate(obstaclePrefabs[1]);
 			}
-			else if (prob <= 70) // purple
+			else if (prob <= 85) // purple
 			{
 				go = Instantiate(obstaclePrefabs[2]);
 			}
-			else if (prob <= 90) // unbreakable vertical
+			else if (prob <= 95) // unbreakable vertical
 			{
 				go = Instantiate(obstaclePrefabs[4]);
 			}
@@ -57,19 +57,20 @@ public class Spawner : MonoBehaviour
                 //rb.useGravity = true;
 
                 Vector3 pos = transform.position;
-                pos.y += Random.Range(-1f, 1.5f);
+                pos.y += Random.Range(0f, 1.5f);
                 pos.z += Random.Range(-2f, 1.5f);
                 go.transform.position = pos;
             }
             else if (go.tag == "UnbreakableCube")
             {
                 Vector3 pos = transform.position;
-                pos.y += Random.Range(1f, 1.5f);
+                pos.y += Random.Range(1.5f, 1.6f);
                 go.transform.position = pos;
             }
 			else
 			{
 				Vector3 pos = transform.position;
+				//pos.y += Random.Range(0f, 0f);
 				pos.z += Random.Range(-1f, 1f);
 				go.transform.position = pos;
 			}

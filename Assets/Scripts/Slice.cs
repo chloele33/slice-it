@@ -12,7 +12,7 @@ public class Slice : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("ObstacleSliced") || collision.collider.CompareTag("Bomb") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
+		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("ObstacleSliced") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
 		{
 			GetComponent<AudioSource>().Play();
 
