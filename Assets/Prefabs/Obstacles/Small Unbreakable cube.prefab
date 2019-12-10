@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 1677104499021840413}
   - component: {fileID: 553829912358537854}
   - component: {fileID: 7930327609164315930}
+  - component: {fileID: 4967781878041860312}
   m_Layer: 0
-  m_Name: Unbreakable cube
-  m_TagString: UnbreakableCube
+  m_Name: Small Unbreakable cube
+  m_TagString: SmallUnbreakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6089889284185601989}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 8.0288, y: 2, z: 23.333}
-  m_LocalScale: {x: 3, y: 0.64332247, z: 0.45}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -123,3 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectedBefore: 0
+--- !u!54 &4967781878041860312
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6089889284185601989}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

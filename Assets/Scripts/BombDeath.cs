@@ -8,8 +8,8 @@ public class BombDeath : MonoBehaviour
 	private void Update()
 	{
 		//Debug.Log("Before If");
-		if ((transform.position.x >= 15f && transform.position.x <= 17f)
-			&& (transform.position.z >= 22f && transform.position.z <= 24f)
+		if ((transform.position.x >= 15f && transform.position.x <= 17.5f)
+			&& (transform.position.z >= 21.5f && transform.position.z <= 24.5f)
 			&& (transform.position.y >= 0f && transform.position.y <= 2f))
 		{
 			//Debug.Log("Explode");

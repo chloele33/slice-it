@@ -14,6 +14,11 @@ public class Slice : MonoBehaviour
     {
 		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("ObstacleSliced") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow"))
 		{
+			if (collision.collider.CompareTag("shield"))
+			{
+				collision.collider.gameObject.GetComponent<MoveTowardPlayer>().enabled = false;
+			}
+
 			GetComponent<AudioSource>().Play();
 
 			GameObject victim = collision.collider.gameObject;
