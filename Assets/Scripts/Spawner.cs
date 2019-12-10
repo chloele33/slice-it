@@ -34,7 +34,11 @@ public class Spawner : MonoBehaviour
 			{
 				go = Instantiate(obstaclePrefabs[2]);
 			}
-			else // unbreakable
+			else if (prob <= 90) // unbreakable vertical
+			{
+				go = Instantiate(obstaclePrefabs[4]);
+			}
+			else
 			{
 				go = Instantiate(obstaclePrefabs[3]);
 			}
@@ -46,7 +50,7 @@ public class Spawner : MonoBehaviour
 				--go.GetComponent<MoveTowardPlayer>().speed;
 			}
 
-            if (go.tag != "UnbreakableCube")
+            if (go.tag != "UnbreakableCube" && go.tag != "unbreakableVertical")
             {
                 Rigidbody rb = go.GetComponent<Rigidbody>();
                 rb.velocity = new Vector3(5f, 0f, 0f);
@@ -57,12 +61,18 @@ public class Spawner : MonoBehaviour
                 pos.z += Random.Range(-2f, 1.5f);
                 go.transform.position = pos;
             }
-            else
+            else if (go.tag == "UnbreakableCube")
             {
                 Vector3 pos = transform.position;
                 pos.y += Random.Range(1f, 1.5f);
                 go.transform.position = pos;
             }
+			else
+			{
+				Vector3 pos = transform.position;
+				pos.z += Random.Range(-1f, 1f);
+				go.transform.position = pos;
+			}
 
             
 

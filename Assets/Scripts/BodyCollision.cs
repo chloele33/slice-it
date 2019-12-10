@@ -26,7 +26,7 @@ public class BodyCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "UnbreakableCube")
+        if (collision.gameObject.tag == "UnbreakableCube" || collision.gameObject.tag == "unbreakableVertical")
         {
             if (detectedBefore)
             {
