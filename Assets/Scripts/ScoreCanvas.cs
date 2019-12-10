@@ -19,8 +19,8 @@ public class ScoreCanvas : MonoBehaviour
     {
         // move with head position
         gameObject.transform.position = new Vector3(
-            head.position.x - 4,
-            gameObject.transform.position.y,
-            gameObject.transform.position.z);
+        head.position.x - 4,
+        gameObject.transform.position.y,
+        gameObject.transform.position.z);
     }
 }

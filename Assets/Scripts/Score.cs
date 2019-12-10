@@ -19,6 +19,8 @@ public class Score : MonoBehaviour
         displayScore = 0;
         //StartCoroutine(ScoreUpdater());
         pointIncreasePerSecond = 0f;
+
+		PlayerPrefs.SetInt("Score", (int)score);
     }
 
     // Update is called once per frame
@@ -38,5 +40,7 @@ public class Score : MonoBehaviour
             pointIncreasePerSecond -= (int)pointIncreasePerSecond;
             scoreUI.text = "SCORE: " + displayScore.ToString();
         }
-    }
+
+		PlayerPrefs.SetInt("Score", (int)score);
+	}
 }

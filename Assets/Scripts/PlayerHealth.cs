@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -61,6 +62,11 @@ public class PlayerHealth : MonoBehaviour
 
 			float currentHealthPct = (float)currentHealth / (float)maxHealth;
 			OnHealthPctChanged(currentHealthPct);
+
+			if (currentHealth <= 0)
+			{
+				SceneManager.LoadScene("GameOverScene");
+			}
 		}
     }
 
