@@ -20,7 +20,9 @@ public class Slice : MonoBehaviour
 
 	public SteamVR_TrackedObject rightHand;
 
+	public float sliceVibrationLength;
 
+	private float remainingVibrationTime = 0;
 	//public SteamVR_Action_Vibration g;
 
 	private void Start()
@@ -33,15 +35,20 @@ public class Slice : MonoBehaviour
 	private void Update()
 	{
 		simulator.velocity = (transform.position - simulator.position) * batSpeed;
+
+		if (remainingVibrationTime > 0)
+		{
+			SteamVR_Controller.Input((int)rightHand.index).TriggerHapticPulse(3999);
+
+			remainingVibrationTime-=Time.deltaTime;
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)
     {
 		if (collision.collider.CompareTag("SmallUnbreakable"))
 		{
-			SteamVR_Controller.Input((int)rightHand.index).TriggerHapticPulse(3500);
-
-			Handheld.Vibrate();
+			remainingVibrationTime = sliceVibrationLength;
 
 			GameObject smallUnbreakableCube = collision.collider.gameObject;
 			Rigidbody rb = smallUnbreakableCube.GetComponent<Rigidbody>();
@@ -54,9 +61,7 @@ public class Slice : MonoBehaviour
 
 		if (collision.collider.CompareTag("Obstacle") || collision.collider.CompareTag("ObstacleSliced") || collision.collider.CompareTag("shield") || collision.collider.CompareTag("Slow") || collision.collider.CompareTag("Bomb"))
 		{
-			SteamVR_Controller.Input((int)rightHand.index).TriggerHapticPulse(500);
-
-			Handheld.Vibrate();
+			remainingVibrationTime = sliceVibrationLength;
 
 			if (collision.collider.CompareTag("shield"))
 			{

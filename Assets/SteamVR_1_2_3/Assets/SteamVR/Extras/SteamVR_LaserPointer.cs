@@ -15,6 +15,8 @@ public delegate void PointerEventHandler(object sender, PointerEventArgs e);
 
 public class SteamVR_LaserPointer : MonoBehaviour
 {
+	public SteamVR_TrackedObject leftHand;
+
 	public float throwSpeed = 500;
 	public GameObject tractorBeam;
 
@@ -146,6 +148,8 @@ public class SteamVR_LaserPointer : MonoBehaviour
         if (controller != null && controller.triggerPressed)
         {
 			tractorBeam.SetActive(true);
+			//vibrates the controller
+			SteamVR_Controller.Input((int)leftHand.index).TriggerHapticPulse(3999);
 			GetComponent<AudioSource>().Play();
 
 			//Debug.Log("Trigger Pressed");
