@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BodyCollision : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class BodyCollision : MonoBehaviour
                 return;
             }
 
+			collision.collider.gameObject.GetComponent<AudioSource>().Play();
+
             ObjectHit obj = collision.gameObject.GetComponent<ObjectHit>();
 
             if (obj.detectedBefore == false)
@@ -43,14 +46,28 @@ public class BodyCollision : MonoBehaviour
                 cam.GetComponent<PlayerHealth>().ModifyHealth(1);
                 obj.detectedBefore = true; ;
                 detectedBefore = true;
-            }
-            
+            }            
         }
+
+		if (collision.collider.CompareTag("Bomb"))
+		{
+			collision.collider.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+			collision.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+			StartCoroutine(Explosion());
+		}
     }
 
-    void OnCollisionExit(Collision collision)
+	IEnumerator Explosion()
+	{
+		yield return new WaitForSeconds(0.3f);
+
+		SceneManager.LoadScene("GameOverScene");
+	}
+
+	void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "UnbreakableCube")
+        if (collision.gameObject.tag == "UnbreakableCube" || collision.gameObject.tag == "unbreakableVertical" || collision.gameObject.tag == "SmallUnbreakable")
         {
             detectedBefore = false;
         }

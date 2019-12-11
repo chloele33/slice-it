@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 958557216457166697}
   - component: {fileID: 958557216457166696}
   - component: {fileID: 958557216457166703}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: blue cube
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -143,6 +143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057889370788410364, guid: b75e690ebf2067a418cb33cd41513412,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 625666151157239007, guid: b75e690ebf2067a418cb33cd41513412,
         type: 3}

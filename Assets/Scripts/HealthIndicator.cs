@@ -17,6 +17,8 @@ public class HealthIndicator : MonoBehaviour
 	public bool shieldOn = false;
 	public Image shieldHealth;
 
+	public GameObject hurtSphere;
+
     private void Start()
     {
         //material = GetComponent<Renderer>().material;
@@ -44,6 +46,7 @@ public class HealthIndicator : MonoBehaviour
     {
         float preChangePct = foregroundImage.fillAmount;
         float elapsed = 0f;
+		hurtSphere.SetActive(true);
 
 		//redScreen.color = new Color(255, 0, 0, 90);
 		//redScreen.enabled = true;
@@ -59,6 +62,7 @@ public class HealthIndicator : MonoBehaviour
         }
 
         foregroundImage.fillAmount = pct;
+		hurtSphere.SetActive(false);
 		//redScreen.enabled = false;
     }
 

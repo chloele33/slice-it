@@ -62,7 +62,7 @@ public class MikesSpawner : MonoBehaviour
 		{
 			float prob = Random.Range(0, 100);
 
-			Debug.Log(probIntervals[indexLimit]);
+			//Debug.Log(probIntervals[indexLimit]);
 			int index = 0;
 			for(int i = 1; i< obstaclePrefabs.Length; i++)
 			{

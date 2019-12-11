@@ -153,7 +153,7 @@ public class SteamVR_LaserPointer : MonoBehaviour
 			
 			if (bHit && bomb == null && hit.collider.gameObject.CompareTag("Bomb") && hit.distance < 8f)
 			{
-				Debug.Log("Bomb Hit");
+				//Debug.Log("Bomb Hit");
 
 				bomb = hit.collider.gameObject;
 
