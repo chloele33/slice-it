@@ -39,7 +39,7 @@ public class Slice : MonoBehaviour
     {
 		if (collision.collider.CompareTag("SmallUnbreakable"))
 		{
-			SteamVR_Controller.Input((int)rightHand.index).TriggerHapticPulse(500);
+			SteamVR_Controller.Input((int)rightHand.index).TriggerHapticPulse(3500);
 
 			Handheld.Vibrate();
 
