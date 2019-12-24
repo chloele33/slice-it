@@ -1,6 +1,8 @@
 # slice-it
 USER’S GUIDE
 
+Please watch the trailer :)
+
 GOALS AND OBJECTIVES
 
 The primary goal of the player is to survive as long as possible (by keeping the health higher than 0 and avoid colliding with a bomb) while trying to score as many goals possible. To do so, the player has to achieve the secondary, more immediate, goals of slicing the blue cubes as many times as possible to get more points, dodging the unbreakable white cubes to avoid losing health, while pushing the small ones to the side barriers to gain points, and avoiding the bombs or using them to destroy obstacles. 
